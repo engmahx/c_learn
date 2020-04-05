@@ -4,10 +4,17 @@
 #include<vector>
 using namespace std;
 
+struct p2
+{
+    vector<tuple<int,float,char,bool>> arr1;
+    string t;
+};
 
 
 auto func()
 {
+    p2 PP;
+    
     tuple<int,string,float> m1_tuple = {34,"string inside tuple",8.9};
     vector<tuple<int,float,char,bool>> arr_tuple;
 
@@ -22,13 +29,29 @@ auto func()
         std::cout << "get<0> : " << get<0>(i) << " get<1> : " << get<1>(i) << " get<2> : " 
                                  << get<2>(i) << " get<3> : " << get<bool>(i) << endl;
     }
-    return arr_tuple;
+    PP.arr1 = arr_tuple;
+    PP.t = " - Mahx - ";
+    return PP;
 }
 
 int main()
 {
+    {
     auto&& func_out = func();
+    std::cout << "in main - " << "get<float>(func_out[4]): " <<  get<float>(func_out.arr1[4]) << endl << endl;
+    }
+    //---------------
+    {
+    auto[func_out_arr,func_out_string] = func();
+    std::cout << "in main - " << "get<float>(func_out[4]): " <<  get<float>(func_out_arr[4]) << endl << endl;
+    }
+    //---------------
+    char arr_c[6] = {'c','g','y','t','q','u'};
 
-    std::cout << "in main - " << "get<float>(func_out[4]): " <<  get<float>(func_out[4]) << endl;
+    for(auto& i:arr_c)
+    {
+        printf("printf  ---  i is'%c' witch is 0x%X - %d\n",i,(int)i,(int)i);
+    }
 
+    return 0;
 }
